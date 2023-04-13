@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mysql-development:
+    image: mysql:latest
+    env_file:
+      - ./dev.env
+    environment: 
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: books
+    ports:
+      - "3308:3306"
+  mysql-test:
+    image: mysql:latest
+    env_file:
+      - ./test.env
+    environment: 
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: books-test
+    ports:
+      - "3309:3306"
