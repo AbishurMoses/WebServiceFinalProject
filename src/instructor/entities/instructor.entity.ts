@@ -1,24 +1,24 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property, OneToMany, Collection } from "@mikro-orm/core";
 import { CreateInstructorDto } from "../dto/create-instructor.dto";
+import { Teaches } from "src/teaches/entities/teach.entity";
 
 @Entity()
 export class Instructor {
     constructor(createInstructorDto: CreateInstructorDto) {
-        this.ID = createInstructorDto.ID
+        this.i_id = createInstructorDto.i_id
         this.name = createInstructorDto.name
         this.dept_name = createInstructorDto.dept_name
         this.salary = createInstructorDto.salary
     }
     @PrimaryKey({
+        autoincrement: true
+    })
+    id: number
+
+    @Property({
         length: 5
     })
-    ID: number
-
-    // Supposed to be dept_name from department
-    // @ForeignKeyn({
-    //     length: 10
-    // })
-    // FIXME: string
+    i_id: number
 
     @Property({
         length: 20
@@ -26,12 +26,18 @@ export class Instructor {
     name: string
 
     @Property({
+        length: 10
+    })
+    salary: number
+
+    @Property({
         length: 20
     })
     dept_name: string
 
-    @Property({
-        length: 10
-    })
-    salary: number
+    // @OneToMany({
+    //     entity: () => Teaches
+    //     mappedBy: teaches => teaches.instructor
+    // })
+    // teaches = new Collection<Teaches>(this)
 }

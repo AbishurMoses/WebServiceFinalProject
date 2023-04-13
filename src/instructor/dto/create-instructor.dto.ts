@@ -1,5 +1,5 @@
 export class CreateInstructorDto {
-    ID: number
+    i_id: number
     name: string
     dept_name: string
     salary: number
